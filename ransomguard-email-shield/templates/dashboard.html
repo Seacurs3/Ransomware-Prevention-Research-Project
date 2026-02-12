@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RansomGuard Email Shield - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="shield-icon">🛡️</div>
+                <div class="title-section">
+                    <h1>RansomGuard Email Shield</h1>
+                    <p class="subtitle">AI-Powered Pre-Execution Ransomware Detection System</p>
+                    <p class="institution">Research Project - NC Innovation Grant</p>
+                </div>
+            </div>
+            <div class="status-indicator">
+                <div id="connection-status" class="status-badge disconnected">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Disconnected</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Statistics Dashboard -->
+        <section class="stats-section">
+            <h2>Detection Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="total-scanned">0</div>
+                        <div class="stat-label">Total Analyzed</div>
+                    </div>
+                </div>
+                <div class="stat-card blocked">
+                    <div class="stat-icon">🚫</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="blocked">0</div>
+                        <div class="stat-label">Blocked</div>
+                    </div>
+                </div>
+                <div class="stat-card quarantined">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="quarantined">0</div>
+                        <div class="stat-label">Quarantined</div>
+                    </div>
+                </div>
+                <div class="stat-card allowed">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="allowed">0</div>
+                        <div class="stat-label">Allowed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Connection Control -->
+        <section class="control-section">
+            <h2>Email Server Connection</h2>
+            <div class="control-panel">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">App Password</label>
+                        <input type="password" id="password" placeholder="Enter app-specific password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imap-server">IMAP Server (Optional)</label>
+                        <input type="text" id="imap-server" placeholder="imap.gmail.com">
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="connect-btn" class="btn btn-primary" onclick="connectEmail()">
+                        🔌 Connect
+                    </button>
+                    <button id="disconnect-btn" class="btn btn-secondary" onclick="disconnectEmail()" disabled>
+                        🔌 Disconnect
+                    </button>
+                    <button id="scan-btn" class="btn btn-success" onclick="scanEmails()" disabled>
+                        🔍 Scan Emails
+                    </button>
+                </div>
+                
+                <div class="info-box">
+                    <strong>ℹ️ Setup Instructions:</strong>
+                    <ul>
+                        <li><strong>Gmail:</strong> Enable 2-Factor Authentication, then generate an App Password in Security settings</li>
+                        <li><strong>Outlook:</strong> Use your regular password if 2FA is disabled, or generate App Password if enabled</li>
+                        <li>Ensure IMAP is enabled in your email settings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scan Results -->
+        <section class="results-section">
+            <div class="results-header">
+                <h2>Scan Results</h2>
+                <button class="btn btn-sm" onclick="exportDecisions()">📥 Export Results</button>
+            </div>
+            
+            <div id="loading-indicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Scanning emails for threats...</p>
+            </div>
+            
+            <div id="results-container" class="results-list">
+                <div class="empty-state">
+                    <div class="empty-icon">📧</div>
+                    <p>No scans performed yet</p>
+                    <p class="empty-subtitle">Connect to your email and click "Scan Emails" to begin</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 RansomGuard Email Shield | Developed for NC Innovation Grant</p>
+            <p>University Research Project - Pre-Execution Ransomware Detection</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
